@@ -20,7 +20,7 @@ type Book = {
 
 function getAllBooks(): readonly Book[] {
     const books = <const>[
-        { id: 1, title: 'Refactoring JavaScript', category: Category.JavaScript, author: 'Evan Burchard', available: true},
+        { id: 1, title: 'Refactoring JavaScript', category: Category.JavaScript, author: 'Evan Burchard', available: true },
         { id: 2, title: 'JavaScript Testing', category: Category.JavaScript, author: 'Liang Yuxian Eugene', available: false },
         { id: 3, title: 'CSS Secrets', category: Category.CSS, author: 'Lea Verou', available: true },
         { id: 4, title: 'Mastering JavaScript Object-Oriented Programming', category: Category.JavaScript, author: 'Andrea Chiarelli', available: true }
@@ -61,11 +61,27 @@ function calcTotalPages(): void {
         { lib: 'libName3', books: 3_000_000_000, avgPagesPerBook: 280 }
     ];
 
-    const r = data.reduce((acc: bigint, obj ) => {
+    const r = data.reduce((acc: bigint, obj) => {
         return acc + BigInt(obj.books) * BigInt(obj.avgPagesPerBook);
     }, 0n);
 
     console.log(r);
+}
+
+function createCustomerID(name: string, id: number): string {
+    return `${id}/${name}`;
+}
+
+function createCustomer(name: string, age?: number, city?: string): void {
+    console.log(`Customer name: ${name}`);
+
+    if (age) {
+        console.log(`Customer age: ${age}`);
+    }
+
+    if (city) {
+        console.log(`Customer city: ${city}`);
+    }
 }
 
 // +++++++++++++++++++++++
@@ -75,3 +91,22 @@ function calcTotalPages(): void {
 // logBookTitles(getBookTitlesByCategory(Category.CSS));
 // console.log(getBookAuthorByIndex(3));
 // calcTotalPages();
+
+// Task 03.01
+// const myID: string = createCustomerID('Ann', 10);
+// console.log(myID);
+
+// // let idGenerator: (name: string, id: number) => string;
+// let idGenerator: typeof createCustomerID;
+// idGenerator = (name: string, id: number) => `${id}/${name}`;
+// idGenerator = createCustomerID;
+
+// const a = typeof createCustomerID;
+// console.log(a);
+
+// console.log(idGenerator('Boris', 20));
+
+// Task 03.02
+createCustomer('Hennadiy');
+createCustomer('Hennadiy', 38);
+createCustomer('Hennadiy', 38, 'Kharkiv');
