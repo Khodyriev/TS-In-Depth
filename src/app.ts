@@ -142,33 +142,28 @@ function bookTitleTransform(title: any): string {
 // Task 03.01
 // const myID: string = createCustomerID('Ann', 10);
 // console.log(myID);
-
 // // let idGenerator: (name: string, id: number) => string;
 // let idGenerator: typeof createCustomerID;
 // idGenerator = (name: string, id: number) => `${id}/${name}`;
 // idGenerator = createCustomerID;
-
 // const a = typeof createCustomerID;
 // console.log(a);
-
 // console.log(idGenerator('Boris', 20));
 
 // Task 03.02
 // createCustomer('Hennadiy');
 // createCustomer('Hennadiy', 38);
 // createCustomer('Hennadiy', 38, 'Kharkiv');
-
 // console.log(getBookTitlesByCategory());
 // console.log(getBookTitlesByCategory(Category.CSS));
-
 // logFirstAvailable();
-
 // console.log(getBookByID(1));
-
 // console.log(сheckoutBooks('Some Customer', ...[1, 3, 4]));
 
+// Task 03.03
 // console.log(getTitles(2, false));
 // console.log(getTitles('Lea Verou'));
 
-console.log(bookTitleTransform('learn it mf'));
+// Task 03.04
+// console.log(bookTitleTransform('learn it mf'));
 // console.log(bookTitleTransform(123));
