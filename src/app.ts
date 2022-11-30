@@ -12,13 +12,29 @@ function showHello(divName: string, name: string) {
 
 enum Category { JavaScript, CSS, HTML, TypeScript, Angular }
 
-type Book = {
+// type Book = {
+//     id: number;
+//     title: string;
+//     author: string;
+//     available: boolean;
+//     category: Category;
+// };
+
+interface Book {
     id: number;
     title: string;
     author: string;
     available: boolean;
     category: Category;
-};
+    pages?: number;
+    // markDamaged?: (reason: string) => void;
+    // markDamaged?(reason: string): void;
+    markDamaged?: DamageLogger;
+}
+
+interface DamageLogger {
+    (reason: string): void;
+}
 
 function getAllBooks(): readonly Book[] {
     const books = <const>[
@@ -86,7 +102,7 @@ function createCustomer(name: string, age?: number, city?: string): void {
     }
 }
 
-function getBookByID(id: number): Book {
+function getBookByID(id: Book['id']): Book | undefined {
     const books = getAllBooks();
     return books.find(book => book.id === id);
 }
@@ -131,6 +147,10 @@ function bookTitleTransform(title: any): string {
     assertStringValue(title);
     return [...title].reverse().join('');
 }
+
+function printBook(book: Book): void {
+    console.log(`${book.title} by ${book.author}`);
+}
 // +++++++++++++++++++++++
 // Task 02.01
 // console.log(getAllBooks());
@@ -167,3 +187,23 @@ function bookTitleTransform(title: any): string {
 // Task 03.04
 // console.log(bookTitleTransform('learn it mf'));
 // console.log(bookTitleTransform(123));
+
+// Task 04.01
+// const myBook: Book = {
+//     id: 5,
+//     title: 'Colors, Backgrounds, and Gradients',
+//     author: 'Eric A. Meyer',
+//     available: true,
+//     category: Category.CSS,
+//     pages: 200,
+//     // markDamaged: (reason: string) => console.log(`Damaged: ${reason}`)
+//     markDamaged(reason: string) {
+//         console.log(`Damaged: ${reason}`);
+//     }
+// };
+// printBook(myBook);
+// myBook.markDamaged('missing back cover');
+
+// Task 04.02
+const logDamage: DamageLogger = (reason: string) => console.log(`Damaged: ${reason}`);
+logDamage('Missing three pages');
