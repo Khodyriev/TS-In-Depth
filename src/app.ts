@@ -175,7 +175,7 @@ function getProperty(book: Book, prop: BookProperties): any {
     return typeof value === 'function' ? value.name : value;
 }
 
-class ReferenceItem {
+abstract class ReferenceItem {
     // title: string;
     // year: number;
 
@@ -202,7 +202,7 @@ class ReferenceItem {
     constructor(
         id: number,
         public title: string,
-        private year: number
+        protected year: number
     ) {
         console.log('Creating a new ReferenceItem...');
         this.#id = id;
@@ -217,7 +217,47 @@ class ReferenceItem {
     getID(): number {
         return this.#id;
     }
+
+    abstract printCitation(): void;
 }
+
+class Encyclopedia extends ReferenceItem {
+    constructor(
+        id: number,
+        title: string,
+        year: number,
+        public edition: number
+    ) {
+        super(id, title, year);
+    }
+
+    override printItem(): void {
+        super.printItem();
+        console.log(`Edition: ${this.edition} (${this.year})`);
+    }
+
+    printCitation(): void {
+        console.log(`${this.title} - ${this.year}`);
+    }
+}
+
+// interface A {
+//     a: number;
+// }
+
+class UniversityLibrarian implements Librarian /* , A */ {
+    name: string;
+    email: string;
+    department: string;
+
+    // a: number = 1;
+
+    assistCustomer(custName: string, bookTitle: string): void {
+        console.log(`${this.name} is assisting ${custName} with book ${bookTitle}`);
+    }
+}
+
+
 
 // +++++++++++++++++++++++
 // Task 02.01
@@ -308,9 +348,22 @@ class ReferenceItem {
 // console.log(getProperty(myBook, 'isbn'));
 
 // Task 05.01
-const ref = new ReferenceItem(1, 'Learn TS', 2022);
-console.log(ref);
-ref.printItem();
-ref.publisher = 'abc groupe';
-console.log(ref.publisher);
-console.log(ref.getID());
+// const ref = new ReferenceItem(1, 'Learn TS', 2022);
+// console.log(ref);
+// ref.printItem();
+// ref.publisher = 'abc groupe';
+// console.log(ref.publisher);
+// console.log(ref.getID());
+
+// Task 05.02, 05.03
+// const refBook: Encyclopedia = new Encyclopedia(1, 'Learn TS', 2022, 2);
+// refBook.printItem();
+// refBook.printItem();
+// console.log(refBook.getID());
+// refBook.printCitation();
+
+// Task 05.04
+const favoriteLibrarian: Librarian = new UniversityLibrarian();
+favoriteLibrarian.name = 'Anna';
+favoriteLibrarian.assistCustomer('Boris', 'Learn TS');
+// favoriteLibrarian.a = 2;
